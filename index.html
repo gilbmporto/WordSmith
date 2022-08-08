@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Word Smith</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gil WordSearch</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Work+Sans:200,500" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Work+Sans:200,300,400,500" rel="stylesheet">
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script src="./script.js" defer></script>
 </head>
 <body>
+
     <header>
         <img src="https://content.codecademy.com/courses/intermediate-javascript-requests/wordsmith_logo.svg" class="logo" />
     </header>
+
     <main id="main">
-    
+        
         <div class="container">
 
-            <h1>Enter a Word</h1>
+        <h1>Digite uma palavra (Em inglês)</h1>
 
-            <form id="form" autocomplete="off">
-                <input type="text" id="input" value="">
-                <button id="submit">SUBMIT</button>
-            </form>
+        <form id="form" autocomplete="off">
+            <input type="text" id="input" value="">
+            <button id="submit">SUBMIT</button>
+        </form>
 
-            <div id="responseField"></div>
-
+        <p id="friendlyMessage">E aperte o botão acima para ver sinônimos</p>
+            
+        <div id="responseField"></div>
+        
+        <div id='areaBotoes'>
+            <div id='ml'><p class='txtButton'>Ver palavras com significado similar</p></div>
+            <div id='sl'><p class='txtButton'>Ver palavras que soam tal qual</p></div>
+            <div id='rel_jjb'><p class='txtButton'>Ver palavras que descrevem a sua palavra</p></div>
         </div>
+            
+        </div>
+        
     </main>
 
-    <script src="./script.js"></script>
 </body>
 </html>

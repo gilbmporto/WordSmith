@@ -1,5 +1,13 @@
 // Information to reach API
-const url = 'https://api.datamuse.com/words?sl=';
+const url = 'https://api.datamuse.com/words';
+var urlParams = '?ml='
+
+//buttons to change the submit button functionality
+const botaoML = document.getElementById('ml');
+const botaoSL = document.getElementById('sl');
+const botaoRELJJB = document.getElementById('rel_jjb');
+const instrucoes = document.getElementById('friendlyMessage');
+
 
 // Selects page elements
 const inputField = document.querySelector('#input');
@@ -8,21 +16,22 @@ const responseField = document.querySelector('#responseField');
 
 // Asynchronous function
 const getSuggestions = () => {
+
   const wordQuery = inputField.value;
-  const endpoint = `${url}${wordQuery}`;
+  const endpoint = `${url}${urlParams}${wordQuery}`;
   
-  fetch(endpoint, {cache: 'no-cache'}).then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Request failed!');
-  }, networkError => {
-    console.log(networkError.message)
-  })
-    .then((jsonResponse) => {
-      //renderRawResponse(jsonResponse);
-      renderResponse(jsonResponse);
-    })
+  fetch(endpoint, {cache: 'no-cache'})
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed!');
+      }, networkError => {
+          console.log(networkError.message);
+      })
+       .then((jsonResponse) => {
+          renderResponse(jsonResponse);
+      })
 }
 
 // Clears previous results and display results to webpage
@@ -35,7 +44,6 @@ const displaySuggestions = (event) => {
 };
 
 submit.addEventListener('click', displaySuggestions);
-
 
 // Formats response to look presentable on webpage
 const renderResponse = (res) => {
@@ -62,17 +70,8 @@ const renderResponse = (res) => {
   // Manipulates responseField to render the modified response
   responseField.innerHTML = `<p>You might be interested in:</p><ol>${wordList}</ol>`;
   return
-}
+};
 
-// Renders response before it is modified
-const renderRawResponse = (res) => {
-  // Takes the first 10 words from res
-  let trimmedResponse = res.slice(0, 10);
-  // Manipulates responseField to render the unformatted response
-  responseField.innerHTML = `<text>${JSON.stringify(trimmedResponse)}</text>`;
-}
-
-// Renders the JSON that was returned when the Promise from fetch resolves.
 const renderJsonResponse = (res) => {
   // Creates an empty object to store the JSON in key-value pairs
   let rawJson = {};
@@ -84,3 +83,36 @@ const renderJsonResponse = (res) => {
   // Manipulates responseField to show the returned JSON.
   responseField.innerHTML = `<pre>${rawJson}</pre>`;
 }
+
+botaoML.addEventListener('click', () => {
+  console.log(urlParams);
+  if (urlParams == '?ml=') {
+      window.alert('Você já está usando essa funcionalidade!')
+  } else {
+      instrucoes.innerHTML = 'E aperte o botão acima para ver palavras com significado parecido'
+      urlParams = '?ml='
+  };
+
+});
+
+botaoSL.addEventListener('click', () => {
+  console.log(urlParams);
+  if (urlParams == '?sl=') {
+      window.alert('Você já está usando essa funcionalidade!')
+  } else {
+      instrucoes.innerHTML = 'E aperte o botão acima para ver palavras que tem um som parecido'
+      urlParams = '?sl='
+  };
+
+});
+
+botaoRELJJB.addEventListener('click', () => {
+  console.log(urlParams);
+  if (urlParams == '?rel_jjb=') {
+      window.alert('Você já está usando essa funcionalidade!')
+  } else {
+      instrucoes.innerHTML = 'E aperte o botão acima para ver palavras que adjetivam a sua palavra'
+      urlParams = '?rel_jjb='
+  };
+
+});
